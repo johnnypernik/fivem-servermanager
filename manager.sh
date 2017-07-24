@@ -192,6 +192,7 @@ wget ${masterfolder}${newestfxdata}fx.tar.xz
 tar xf fx.tar.xz
 cd ..
 chmod -R 777 ./*
+whiptail --title "SUCCESS" --msgbox "FX update complete" 10 60
 ./manager.sh
 fi
 
@@ -217,7 +218,7 @@ rm ./default-config.cfg
 wget $configurl
 chmod +x ./default-config.cfg
 cd ..
-
+whiptail --title "SUCCESS" --msgbox "Manager update complete" 10 60
 ./manager.sh
 fi
 
