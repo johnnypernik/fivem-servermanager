@@ -5,6 +5,11 @@ if [ "$(whoami)" != "root" ]; then
 	exit 1
 fi
 
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $DIR
+
+
 OPTION=$(whiptail --title "Slluxx Server manager" --menu "Choose your option" 15 60 5 \
 "1" "Manage existing servers" \
 "2" "Add server" \
