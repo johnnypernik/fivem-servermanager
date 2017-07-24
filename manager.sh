@@ -14,7 +14,8 @@ OPTION=$(whiptail --title "Slluxx Server manager" --menu "Choose your option" 15
 "1" "Manage existing servers" \
 "2" "Add server" \
 "3" "Delete server" \
-"4" "Update FXdata" 3>&1 1>&2 2>&3)
+"4" "Update FXdata" \
+"5" "Update manager" 3>&1 1>&2 2>&3)
 
 case "$OPTION" in
         1)
@@ -28,6 +29,9 @@ case "$OPTION" in
             ;;
         4)
             update=true
+            ;;
+        5)
+            updatemanager=true
             ;;
         *)
             exit 1
@@ -188,6 +192,32 @@ wget ${masterfolder}${newestfxdata}fx.tar.xz
 tar xf fx.tar.xz
 cd ..
 chmod -R 777 ./*
+./manager.sh
+fi
+
+
+#
+#
+# UPDATE MANAGER
+#
+#
+
+
+if [[ $updatemanager == "true" ]]; then
+
+managerurl="https://raw.githubusercontent.com/Slluxx/fivem-servermanager/master/manager.sh"
+configurl="https://raw.githubusercontent.com/Slluxx/fivem-servermanager/master/managerfiles/default-config.cfg"
+
+rm ./manager.sh
+wget $managerurl
+
+cd ./managerfiles
+rm ./default-config.cfg
+wget $configurl
+
+cd ..
+chmod -R ./*
+
 ./manager.sh
 fi
 
