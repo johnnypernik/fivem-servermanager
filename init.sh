@@ -48,9 +48,11 @@ fi
 	cd ..
 	mkdir servers
 	mkdir managerfiles
-	# download manager.sh
-	# download ./managerfiles/default-config.cfg
-	# download ./used-ports.txt
+	wget https://raw.githubusercontent.com/Slluxx/fivem-servermanager/master/manager.sh
+	cd ./managerfiles
+	wget https://github.com/Slluxx/fivem-servermanager/blob/master/managerfiles/default-config.cfg
+	wget https://raw.githubusercontent.com/Slluxx/fivem-servermanager/master/managerfiles/used-ports.txt
+	cd ..
 	chmod -R 777 $installlocation
 	
 echo "Installation process is over, please run 'sudo $installlocation/manager.sh' now. Dont forget to update the fxdata."
