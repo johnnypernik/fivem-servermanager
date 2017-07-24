@@ -14,7 +14,7 @@ sudo apt-get install xz-utils
 if (whiptail --title "Update & Upgrade" --yesno "Do you want to update your system?" 10 60) then
     sudo apt-get update && apt-get upgrade
 else
-	if [[ $2 == "--no-update" ]]; then
+	if [[ $1 == "--no-update" ]]; then
 		echo "ok mr expert. but its your fault it something breaks."
 	else
 		echo "Sorry, we cant support you then."
