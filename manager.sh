@@ -216,7 +216,7 @@ rm ./default-config.cfg
 wget $configurl
 
 cd ..
-chmod -R ./*
+chmod -r 777 ./*
 
 ./manager.sh
 fi
