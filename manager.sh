@@ -48,13 +48,13 @@ if [[ $add == "true" ]]; then
 	if [ $exitstatus = 0 ]; then
 	
 	    if [ -d "./servers/$question" ]; then
-	    	echo "Cant use this server name."
-	    	exit 1
+	    	whiptail --title "ERROR" --msgbox "That name is already in use." 10 60
+		./manager.sh
 	    fi
 	    
 	    if echo $question | grep -q " "; then
-	    	echo "Cant use a name with spaces."
-	    	exit 1
+	    	whiptail --title "ERROR" --msgbox "Please dont use spaces." 10 60
+			./manager.sh
 		fi
 	    
 	    git clone https://github.com/citizenfx/cfx-server-data.git ./servers/$question
@@ -353,7 +353,7 @@ if [[ $console == "true" ]]; then
 		./manager.sh
 	else
 		if screen -list | grep -q "$console"; then
-		    whiptail --title "REMEMBER" --msgbox "To quit console, never exit or use CTRL + C. It will close the server! \ Instead hold down CTRL and press A,D!" 10 60
+		    whiptail --title "REMEMBER" --msgbox "To quit console, never exit or use CTRL + C. It will close the server! Instead hold down CTRL and press A,D!" 10 60
 		    screen -r $console
 		    ./manager.sh
 		else
