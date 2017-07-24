@@ -55,4 +55,4 @@ fi
 	cd ..
 	chmod -R 777 $installlocation
 	
-echo "Installation process is over, please run 'sudo $installlocation/manager.sh' now. Dont forget to update the fxdata."
+echo "Installation process is over, please run 'sudo ${installlocation}manager.sh' now. Dont forget to update the fxdata."
