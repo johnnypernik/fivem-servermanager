@@ -210,13 +210,13 @@ configurl="https://raw.githubusercontent.com/Slluxx/fivem-servermanager/master/m
 
 rm ./manager.sh
 wget $managerurl
+chmod +x ./manager.sh
 
 cd ./managerfiles
 rm ./default-config.cfg
 wget $configurl
-
+chmod +x ./default-config.cfg
 cd ..
-chmod -r 777 ./*
 
 ./manager.sh
 fi
