@@ -276,8 +276,8 @@ if [[ $start == "true" ]]; then
 		./manager.sh
 	else
 		if ! screen -list | grep -q "$startserver"; then
-		    cd ./servers/$startserver
-			screen -dmS $startserver ../../fxdata/run.sh +exec config.sh
+			cd ./servers/$startserver
+			screen -dmS $startserver ../../fxdata/run.sh +exec config.cfg
 			cd ../../
 			whiptail --title "SUCCESS" --msgbox "Server started." 10 60
 			./manager.sh
