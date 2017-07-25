@@ -312,7 +312,7 @@ if [[ $stop == "true" ]]; then
 		./manager.sh
 	else
 		if screen -list | grep -q "$stopserver"; then
-		    screen -S $stopserver -X "quit"
+		    	screen -dmS $stopserver ../../fxdata/run.sh +exec config.cfg
 			whiptail --title "SUCCESS" --msgbox "Server stopped." 10 60
 			./manager.sh
 		else
@@ -348,9 +348,9 @@ if [[ $restart == "true" ]]; then
 		./manager.sh
 	else
 		if screen -list | grep -q "$restart"; then
-			screen -S $restart -X "quit"
+			screen -dmS $startserver ../../fxdata/run.sh +exec config.cfg
 			cd ./servers/$restart
-			screen -dmS $restart ../../fxdata/run.sh +exec config.sh
+			screen -dmS $restart ../../fxdata/run.sh +exec config.cfg
 			cd ../../
 			whiptail --title "SUCCESS" --msgbox "Server restarted." 10 60
 			./manager.sh
