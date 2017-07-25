@@ -16,7 +16,7 @@ This will help you set up multiple FX Server for fivem.
 
 ## Installation
 
-Wopy and paste this code to start the installation.
+Copy and paste this code to start the installation.
 You can choose an installationpath then.
 
 ```shell
