@@ -40,7 +40,9 @@ fi
 
     mkdir -p $installlocation/fxdata
 	cd $installlocation/fxdata
-	wget https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/290-04e034829f75169f11ee33abf67281ecd74728e3/fx.tar.xz # at point of making the newest.
+	masterfolder="https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/"
+	newestfxdata="$(curl $masterfolder | grep '<a href' | tail -1 | awk -F[\>\<] '{print $3}')"
+	wget ${masterfolder}${newestfxdata}fx.tar.xz 
 	tar xf fx.tar.xz
 	rm fx.tar.xz
 	cd ..
