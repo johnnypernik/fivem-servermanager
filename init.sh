@@ -9,7 +9,7 @@ apt-get install whiptail -y
 
 if (whiptail --title "Update & Upgrade" --yesno "Do you want to update your system?" 10 60) then
     	sudo apt-get update && apt-get upgrade
-	sudo apt-get install git xz-utils -y
+	sudo apt-get install git xz-utils wget curl -y 
 else
 	if [[ $1 == "--no-update" ]]; then
 		echo "ok mr expert. but its your fault if something breaks."
