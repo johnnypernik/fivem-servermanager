@@ -1,13 +1,23 @@
-#!/bin/bash
+﻿#!/bin/bash
 clear
 if [ "$(whoami)" != "root" ]; then
 	echo "Please run this script as sudo."
 	exit 1
 fi
 
-
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR
+
+
+### after update stuff
+if [ ! -d $DIR/logs ]; then
+  mkdir -p $DIR/logs;
+fi
+
+
+
+
+
 
 
 OPTION=$(whiptail --title "Slluxx Server manager" --menu "Choose your option" 15 60 5 \
@@ -98,11 +108,21 @@ if [[ $add == "true" ]]; then
 			exit 1
 		fi
 		
+		license=$(whiptail --title "Enter your license key" --inputbox "You need a license to run the server. Get it from keymaster.fivem.net" 10 60 3>&1 1>&2 2>&3)
+		exitstatus=$?
+		if [ $exitstatus = 0 ]; then
+			license=$license
+		else
+			echo "You chose Cancel."
+			exit 1
+		fi
+
 		
 		
 		cat ./managerfiles/default-config.cfg | \
 		sed "s/VAR_PORT/$port/" | \
 		sed "s/VAR_RCON_PASSWORD/$rcon/" | \
+		sed "s/VAR_LICENSE_KEY/$license/" | \
 		sed "s/VAR_HOSTNAME/$servername/">>./servers/$question/config.cfg
 		
 	    echo "$port">>./managerfiles/used-ports.txt
@@ -278,7 +298,7 @@ if [[ $start == "true" ]]; then
 	else
 		if ! screen -list | grep -q "$startserver"; then
 			cd ./servers/$startserver
-			screen -dmS $startserver ../../fxdata/run.sh +exec config.cfg
+			screen -dmSL $startserver ../../fxdata/run.sh +exec config.cfg
 			cd ../../
 			whiptail --title "SUCCESS" --msgbox "Server started." 10 60
 			./manager.sh
@@ -351,7 +371,7 @@ if [[ $restart == "true" ]]; then
 		if screen -list | grep -q "$restart"; then
 			screen -S $restart -X at "#" stuff ^C
 			cd ./servers/$restart
-			screen -dmS $restart ../../fxdata/run.sh +exec config.cfg
+			screen -dmSL $restart ../../fxdata/run.sh +exec config.cfg
 			cd ../../
 			whiptail --title "SUCCESS" --msgbox "Server restarted." 10 60
 			./manager.sh
@@ -386,7 +406,7 @@ if [[ $console == "true" ]]; then
 	else
 		if screen -list | grep -q "$console"; then
 		    whiptail --title "REMEMBER" --msgbox "To quit console, never exit or use CTRL + C. It will close the server! Instead hold down CTRL and press A,D!" 10 60
-		    screen -r $console
+		    sudo screen -r $console
 		    ./manager.sh
 		else
 			whiptail --title "ERROR" --msgbox "That server is not running." 10 60
