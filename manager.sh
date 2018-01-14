@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 clear
 if [ "$(whoami)" != "root" ]; then
 	echo "Please run this script as sudo."
