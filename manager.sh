@@ -202,7 +202,7 @@ done
 
 
 masterfolder="https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/"
-newestfxdata="$(curl $masterfolder | grep '<a href' | tail -1 | awk -F[\>\<] '{print $3}')"
+newestfxdata="$(curl $masterfolder | grep '<a href' | grep -v 'revoked' | tail -1 | awk -F[\>\<] '{print $3}')"
 # filter valid urls and take last one.
 
 rm -R ./fxdata
